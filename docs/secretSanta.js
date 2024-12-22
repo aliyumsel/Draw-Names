@@ -7,12 +7,17 @@ function addVertex(node,otherNode){
 	otherNode.vertexList.push(node);
 }
 
-function getNames(){
-	let namesList = [];
-	namesList.push(document.getElementById("name1").value);
-	namesList.push(document.getElementById("name2").value);
-	namesList.push(document.getElementById("name3").value);
-	namesList.push(document.getElementById("name4").value);
-	namesList.push(document.getElementById("name5").value);
-	return namesList;
+function generateGraph(){
+	let namesList = getAllNames();
+	let graphNodes = [];
+	for(let i = 0; i < namesList.length; i++){
+		graphNodes.push(createNode(namesList[i]));
+		for(let j = 0; j < i; j++){
+			graphNodes[j].vertexList.push(graphNodes[i]);
+			graphNodes[i].vertexList.push(graphNodes[j]);
+		}
+	}
+
+	console.log(graphNodes);
+
 }
