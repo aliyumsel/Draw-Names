@@ -26,7 +26,6 @@ function generateGraph(){
 		}
 	}
 
-	console.log(graphNodes);
 	return graphNodes;
 
 }
@@ -49,20 +48,25 @@ function getNodeWithLeastVertices(nodes){
 		} 
 	}
 
-	console.log(minVertexSize);
-	console.log(minVerticesIndex);
 	return minVerticesIndex;
 }
 
 function finalizeSelection(){
 	let nodes = generateGraph();
-	let listSize = nodes.length;
-	for(let i = 0; i < listSize; i++){
+	for(let i = 0; i < nodes.length; i++){
 		let index = getNodeWithLeastVertices(nodes);
 		let selectedIndex = randomInt(nodes[index].vertexList.length);
 		let selectedNode = nodes[index].vertexList[selectedIndex];
 		nodes[index].selectedNode = selectedNode;
 		removeNodeFromEveryone(nodes,selectedNode);
 	}
-	console.log(nodes);
+	document.getElementById("result").innerHTML = visualize(nodes);
+}
+
+function visualize(nodes){
+	let result = "";
+	for(let i = 0; i < nodes.length; i++){
+		result = result + nodes[i].name + "-->" + nodes[i].selectedNode.name + "<br>\n";
+	}
+	return result;
 }
