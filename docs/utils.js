@@ -11,3 +11,10 @@ function nvl(value, nullValue){
     }
     return value;
 }
+
+function randomInt(listSize){
+    if(listSize <= 0){
+        return -1;
+    }
+    return Math.floor(listSize*Math.random());
+}

@@ -50,4 +50,3 @@ function init(){
 	formHtml = formHtml + inputGenerator(nameCount,"");
 	document.getElementById(FORM_ID).innerHTML = formHtml;
 }
-
