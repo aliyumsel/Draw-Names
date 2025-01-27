@@ -1,8 +1,8 @@
 //const NAME_COUNT = "nameCount";
 //const NAME = "name";
 const FORM_ID = "nameForm";
-const INPUT_TEMPLATE = "<input class=\"participant\" type=\"text\" placeholder=\"İsim\" oninput=\"updateForm(#)\" onblur=\"removeIfEmpty(#)\" id=\"name#\" value=\"#\">";
-const CHECKBOX_TEMPLATE = "<input type=\"checkbox\" id=\"#\" name=\"#\" value=\"#\"><label for=\"#\">#</label>"
+const INPUT_TEMPLATE = "<input class=\"w3-input w3-border w3-round w3-margin\" type=\"text\" placeholder=\"İsim\" oninput=\"updateForm(#)\" onblur=\"removeIfEmpty(#)\" id=\"name#\" value=\"#\">";
+const CHECKBOX_TEMPLATE = "<input class=\"w3-check\" type=\"checkbox\" id=\"#\" name=\"#\" value=\"#\"> <label for=\"#\">#</label>"
 
 function updateForm(index){
 	let nameCount = getNameCount();
@@ -67,15 +67,21 @@ function checkboxGenerator(id,value){
 function generateExclusionsForm(){
 	let namesArr = getAllNames();
 	let nameCount = namesArr.length;
-	let formHtml = "\n";
+	let formHtml = "";
 	for(let i = 0; i < nameCount; i++){
 		let name = namesArr[i];
 		let otherNames = namesArr.toSpliced(i,1);
-		formHtml = formHtml +  "\n<p>" + name + ": </p>\n<div class=\"flex-container\">";
+		if(i%4===0){
+			formHtml = formHtml + "\n<div class=\"w3-row\">"
+		}
+		formHtml = formHtml +  "\n<div class=\"w3-col m6 l3\">\n<p>" + name + ": </p>";
 		for(let j = 0; j < otherNames.length; j++){
-			formHtml = formHtml + "\n<div>" + checkboxGenerator("name"+i+j, otherNames[j]) + "</div>" ;
+			formHtml = formHtml + "\n<div class=\"w3-padding-small\">" + checkboxGenerator("name"+i+j, otherNames[j]) + "</div>" ;
 		}
 		formHtml = formHtml + "\n</div>"
+		if(i%4===3){
+			formHtml = formHtml + "\n</div>"
+		}
 	}
 	formHtml = formHtml + "\n"
 	document.getElementById("exclusionsForm").innerHTML = formHtml;
