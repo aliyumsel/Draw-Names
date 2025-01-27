@@ -6,20 +6,33 @@
 		<script src="namesDao.js"></script>
 		<script src="main.js"></script>
 		<script src="secretSanta.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
 	</head>
 	<body onload="init()">
 
-		<form id="nameForm">
+		<div style="overflow:auto">
+			<div class="first" id="nameFormContainer" style="display:none">
+				<form id="nameForm">
 
-		</form>
-		<input type="button" id="submitNameForm" value="İlerle" form="nameForm" onclick="finalizeSelection()">
+				</form>
+				<button type="button" id="submitNameForm" onclick="generateExclusionsForm()"> İlerle </button>
+			</div>
 
-		<p id="result"></p>
+			<div class="second" id="exclusionsFormContainer" style="display:none">
+				<form id="exclusionsForm">
 
-		<form id="exclusionsForm">
+				</form> 
+				<button type="button" id="backToNameForm" onclick="showPage(0)">Geri</button>
+				<button type="button" id="submitExclusionsForm" onclick="finalizeSelection()">İlerle</button>
+			</div>
 
-		</form>
-		<input type="button" id="submitExclusionsForm" value="İlerle" form="nameForm" style="display:none;">
+			<div class="third" id="results" style="display:none">
+				<p id="result"></p>
+				<button type="button" id="backToNameForm" onclick="showPage(1)">Geri</button>
+			</div>
+
+		</div>
 
 	</body>
 </html>

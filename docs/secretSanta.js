@@ -61,6 +61,7 @@ function finalizeSelection(){
 		removeNodeFromEveryone(nodes,selectedNode);
 	}
 	document.getElementById("result").innerHTML = visualize(nodes);
+	showPage(2);
 }
 
 function visualize(nodes){

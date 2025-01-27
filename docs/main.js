@@ -1,8 +1,8 @@
 //const NAME_COUNT = "nameCount";
 //const NAME = "name";
 const FORM_ID = "nameForm";
-const INPUT_TEMPLATE = "<br><input type=\"text\" placeholder=\"İsim\" oninput=\"updateForm(#)\" onblur=\"removeIfEmpty(#)\" id=\"name#\" value=\"#\">";
-const CHECKBOX_TEMPLATE = "<input type=\"checkbox\" id=\"#\" name=\"#\" value=\"#\"><label for=\"#\">#</label><br>"
+const INPUT_TEMPLATE = "<input class=\"participant\" type=\"text\" placeholder=\"İsim\" oninput=\"updateForm(#)\" onblur=\"removeIfEmpty(#)\" id=\"name#\" value=\"#\">";
+const CHECKBOX_TEMPLATE = "<input type=\"checkbox\" id=\"#\" name=\"#\" value=\"#\"><label for=\"#\">#</label>"
 
 function updateForm(index){
 	let nameCount = getNameCount();
@@ -50,6 +50,7 @@ function init(){
 	}
 	formHtml = formHtml + inputGenerator(nameCount,"");
 	document.getElementById(FORM_ID).innerHTML = formHtml;
+	showPage(0);
 }
 
 function checkboxGenerator(id,value){
@@ -66,16 +67,36 @@ function checkboxGenerator(id,value){
 function generateExclusionsForm(){
 	let namesArr = getAllNames();
 	let nameCount = namesArr.length;
-	let formHtml = "\n<ul>";
+	let formHtml = "\n";
 	for(let i = 0; i < nameCount; i++){
 		let name = namesArr[i];
 		let otherNames = namesArr.toSpliced(i,1);
-		formHtml = formHtml + "<li>" + name + "<br>";
+		formHtml = formHtml +  "\n<p>" + name + ": </p>\n<div class=\"flex-container\">";
 		for(let j = 0; j < otherNames.length; j++){
-			formHtml = formHtml + checkboxGenerator("name"+i+j, otherNames[j]);
+			formHtml = formHtml + "\n<div>" + checkboxGenerator("name"+i+j, otherNames[j]) + "</div>" ;
 		}
-
+		formHtml = formHtml + "\n</div>"
 	}
-	formHtml = formHtml + "\n</ul>"
+	formHtml = formHtml + "\n"
 	document.getElementById("exclusionsForm").innerHTML = formHtml;
+	showPage(1);
 }
+
+function showPage(number){
+	if(number === 0) {
+		document.getElementById("nameFormContainer").style = "display:block";
+		document.getElementById("exclusionsFormContainer").style = "display:none";
+		document.getElementById("results").style = "display:none";
+	}
+	else if(number === 1) {
+		document.getElementById("nameFormContainer").style = "display:none";
+		document.getElementById("exclusionsFormContainer").style = "display:block";
+		document.getElementById("results").style = "display:none";
+	}
+	else if(number === 2) {
+		document.getElementById("nameFormContainer").style = "display:none";
+		document.getElementById("exclusionsFormContainer").style = "display:none";
+		document.getElementById("results").style = "display:block";
+	}
+}
+
