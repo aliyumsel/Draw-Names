@@ -74,7 +74,7 @@ function generateExclusionsForm(){
 		if(i%4===0){
 			formHtml = formHtml + "\n<div class=\"w3-row\">"
 		}
-		formHtml = formHtml +  "\n<div class=\"w3-col m6 l3\">\n<p>" + name + ": </p>";
+		formHtml = formHtml +  "\n<div class=\"w3-col m6 l3  w3-left-align\">\n<p>" + name + ": </p>";
 		for(let j = 0; j < otherNames.length; j++){
 			formHtml = formHtml + "\n<div class=\"w3-padding-small\">" + checkboxGenerator("name"+i+j, otherNames[j]) + "</div>" ;
 		}
